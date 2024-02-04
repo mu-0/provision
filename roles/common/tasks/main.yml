@@ -1,0 +1,4 @@
+- name: Copy configuration file
+  ansible.builtin.copy:
+    src: xinitrc
+    dest: ~/.xinitrc
