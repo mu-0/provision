@@ -1,4 +1,11 @@
-- name: Copy configuration file
+- name: install apt packages
+  become: yes
+  ansible.builtin.apt:
+    name: "{{ apt_packages }}"
+    state: present
+    update_cache: yes
+
+- name: install xinitrc script
   ansible.builtin.copy:
     src: xinitrc
     dest: ~/.xinitrc
