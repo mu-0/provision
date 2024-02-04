@@ -2,4 +2,7 @@
 apt_packages:
   - git
   - vim
+  - xinit
   - i3
+  - firefox
+  - ttf-mikachan

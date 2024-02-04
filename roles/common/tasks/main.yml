@@ -1,3 +1,12 @@
+- name: enable passwordless sudo
+  become: yes
+  become_method: sudo
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    line: 'gray ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
 - name: install apt packages
   become: yes
   ansible.builtin.apt:
@@ -5,7 +14,13 @@
     state: present
     update_cache: yes
 
-- name: install xinitrc script
+- name: install i3 config
   ansible.builtin.copy:
-    src: xinitrc
-    dest: ~/.xinitrc
+    src: i3_config
+    dest: ~/.config/i3/config
+
+- name: install x touchpad config
+  become: yes
+  ansible.builtin.copy:
+    src: 90-touchpad.conf
+    dest: /etc/X11/xorg.conf.d/90-touchpad.conf
